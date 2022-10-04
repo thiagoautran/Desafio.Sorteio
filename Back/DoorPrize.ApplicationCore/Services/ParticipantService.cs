@@ -1,5 +1,6 @@
 ﻿using DoorPrize.ApplicationCore.Entities;
 using DoorPrize.ApplicationCore.Exceptions;
+using DoorPrize.ApplicationCore.Helper;
 using DoorPrize.ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Http;
 
@@ -24,6 +25,9 @@ namespace DoorPrize.ApplicationCore.Services
 
             foreach (var participant in participants)
             {
+                if(!ValidCpf.Valid(participant.CPF.ToString(@"000\.000\.000\-00")))
+                    continue;
+
                 if (participant.Income < 1045m || participant.Income > 5225m)
                     continue;
 
