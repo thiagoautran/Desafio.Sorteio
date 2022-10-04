@@ -25,7 +25,7 @@ namespace DoorPrize.Infrastructure.DoorPrize
             var response = await client.SendAsync(request);
             var contentString = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 return JsonSerializer.Deserialize<GetResponse>(contentString);
             }
@@ -45,7 +45,7 @@ namespace DoorPrize.Infrastructure.DoorPrize
             var response = await client.SendAsync(request);
             var contentString = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 return JsonSerializer.Deserialize<WinnerResponse>(contentString);
             }
