@@ -53,4 +53,4 @@
 
 1) Api [www.localhost:8003](http://www.localhost:8003/index.html)
 
-2) MVC [www.localhost:8004](http://www.localhost:8004/index.html)
+2) MVC [www.localhost:8004](http://www.localhost:8004)
