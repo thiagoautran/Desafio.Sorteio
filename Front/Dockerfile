@@ -8,6 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["DoorPrize.MVC/DoorPrize.MVC.csproj", "DoorPrize.MVC/"]
+COPY ["DoorPrize.ApplicationCore/DoorPrize.ApplicationCore.csproj", "DoorPrize.ApplicationCore/"]
+COPY ["DoorPrize.Infrastructure/DoorPrize.Infrastructure.csproj", "DoorPrize.Infrastructure/"]
 RUN dotnet restore "DoorPrize.MVC/DoorPrize.MVC.csproj"
 COPY . .
 WORKDIR "/src/DoorPrize.MVC"
