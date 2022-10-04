@@ -1,8 +1,8 @@
-using Autransoft.Fluent.HttpClient.Lib.DTOs;
 using Autransoft.Fluent.HttpClient.Lib.Extensions;
 using Autransoft.Test.Lib.Extensions;
 using Autransoft.Test.Lib.Program;
 using DoorPrize.Api;
+using DoorPrize.ApplicationCore.DTOs.Response.Participant.Get;
 using DoorPrize.ApplicationCore.DTOs.Response.Participant.Winners;
 using DoorPrize.ApplicationCore.Entities;
 using DoorPrize.ApplicationCore.Interfaces;
@@ -15,7 +15,7 @@ using System.Net;
 namespace DoorPrize.IntegrationTest
 {
     [TestClass]
-    public class GetWinners : BaseApiTest<Startup<DependencyInjectionConfigurationTest>, ParticipantEntity, ParticipantConfiguration>
+    public class Get : BaseApiTest<Startup<DependencyInjectionConfigurationTest>, ParticipantEntity, ParticipantConfiguration>
     {
         [TestInitialize]
         public void TestInitialize() => base.Initialize();
@@ -33,15 +33,25 @@ namespace DoorPrize.IntegrationTest
             await AddPhysicallyHandicapped();
             await AddGeneral();
 
-            var response = await HttpClient.Fluent().GetAsync("door.prize/v1/participant/winners");
-            var data = await response.DeserializeAsync<WinnerResponse>();
+            var response = await HttpClient.Fluent().GetAsync("door.prize/v1/participant");
+            var data = await response.DeserializeAsync<GetResponse>();
 
             Assert.IsNotNull(data.HttpStatusCode);
             Assert.AreEqual(HttpStatusCode.OK, data.HttpStatusCode.Value);
-            Assert.IsNotNull(data.Data.Elderly);
-            Assert.IsNotNull(data.Data.PhysicallyHandicapped);
+            Assert.AreEqual(2, data.Data.Elderly.Count());
+            Assert.AreEqual(2, data.Data.PhysicallyHandicapped.Count());
             Assert.AreEqual(3, data.Data.General.Count());
+            Assert.AreEqual(7, data.Data.NumberParticipants);
         }
+
+        //[TestMethod]
+        //public async Task NotFound()
+        //{
+        //    var response = await HttpClient.Fluent().GetAsync("door.prize/v1/participant/elderly");
+
+        //    Assert.IsNotNull(response.HttpStatusCode);
+        //    Assert.AreEqual(HttpStatusCode.NotFound, response.HttpStatusCode.Value);
+        //}
 
         private async Task AddElderly()
         {

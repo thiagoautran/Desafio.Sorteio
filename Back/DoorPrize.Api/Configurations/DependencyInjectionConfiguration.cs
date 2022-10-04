@@ -1,4 +1,5 @@
 ﻿using DoorPrize.ApplicationCore.DTOs.AppSettings;
+using DoorPrize.ApplicationCore.Facade;
 using DoorPrize.ApplicationCore.Interfaces;
 using DoorPrize.ApplicationCore.Services;
 using DoorPrize.Infrastructure.Data;
@@ -40,6 +41,7 @@ namespace DoorPrize.Api.Configurations
 
         public virtual void AddApplicationCore(IServiceCollection services)
         {
+            services.AddScoped<IParticipantFacade, ParticipantFacade>();
             services.AddScoped<IParticipantService, ParticipantService>();
         }
 

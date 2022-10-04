@@ -1,7 +1,7 @@
 using DoorPrize.ApplicationCore.DTOs.Response;
-using DoorPrize.ApplicationCore.DTOs.Response.Participant;
+using DoorPrize.ApplicationCore.DTOs.Response.Participant.Get;
+using DoorPrize.ApplicationCore.DTOs.Response.Participant.Winners;
 using DoorPrize.ApplicationCore.Interfaces;
-using DoorPrize.ApplicationCore.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoorPrize.Api.Controllers.v1
@@ -12,10 +12,11 @@ namespace DoorPrize.Api.Controllers.v1
     [Route("door.prize/v{version:apiVersion}/[controller]")]
     public class ParticipantController : ControllerBase
     {
+        private readonly IParticipantFacade _participantFacade;
         private readonly IParticipantService _participantService;
 
-        public ParticipantController(IParticipantService participantService) =>
-            _participantService = participantService;
+        public ParticipantController(IParticipantFacade participantFacade, IParticipantService participantService) =>
+            (_participantFacade, _participantService) = (participantFacade, participantService);
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -27,38 +28,18 @@ namespace DoorPrize.Api.Controllers.v1
             return Ok();
         }
 
-        [HttpGet("elderly")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ParticipantResponse))]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NotFoundResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(InternalServerErrorResponse))]
-        public async Task<IActionResult> Elderly() =>
-            Ok((await _participantService.ListElderly()).ToParticipantResponse());
-
-        [HttpGet("physically_handicapped")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ParticipantResponse))]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NotFoundResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(InternalServerErrorResponse))]
-        public async Task<IActionResult> PhysicallyHandicapped() =>
-            Ok((await _participantService.ListPhysicallyHandicapped()).ToParticipantResponse());
-
-        [HttpGet("general")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ParticipantResponse))]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NotFoundResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(InternalServerErrorResponse))]
-        public async Task<IActionResult> General() =>
-            Ok((await _participantService.ListGeneral()).ToParticipantResponse());
+        public async Task<IActionResult> Get() =>
+            Ok(await _participantFacade.Get());
 
         [HttpGet("winners")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WinnerResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(InternalServerErrorResponse))]
-        public async Task<IActionResult> Winners()
-        {
-            var elderly = await _participantService.WinnerElderly();
-            var physicallyHandicapped = await _participantService.WinnerPhysicallyHandicapped();
-            var general = await _participantService.WinnerGeneral();
-
-            return Ok(elderly.ToWinnerResponse(physicallyHandicapped, general));
-        }
+        public async Task<IActionResult> Winners() =>
+            Ok(await _participantFacade.Winners());
     }
 }

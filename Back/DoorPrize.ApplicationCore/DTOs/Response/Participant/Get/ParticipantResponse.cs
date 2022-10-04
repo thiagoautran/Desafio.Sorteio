@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DoorPrize.ApplicationCore.DTOs.Response.Participant
+namespace DoorPrize.ApplicationCore.DTOs.Response.Participant.Get
 {
     public class ParticipantResponse
     {

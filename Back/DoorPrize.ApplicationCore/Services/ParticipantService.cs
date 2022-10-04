@@ -45,39 +45,18 @@ namespace DoorPrize.ApplicationCore.Services
             }
         }
 
-        public async Task<IEnumerable<ParticipantEntity>> ListElderly()
-        {
-            var list = await _participantRepository.ListElderly();
-            if (list.Count() == 0)
-                throw new NotFoundException();
+        public async Task<IEnumerable<ParticipantEntity>> ListElderly() =>
+            await _participantRepository.ListElderly();
 
-            return list;
-        }
+        public async Task<IEnumerable<ParticipantEntity>> ListPhysicallyHandicapped() =>
+            await _participantRepository.ListPhysicallyHandicapped();
 
-        public async Task<IEnumerable<ParticipantEntity>> ListPhysicallyHandicapped()
-        {
-            var list = await _participantRepository.ListPhysicallyHandicapped();
-            if (list.Count() == 0)
-                throw new NotFoundException();
-
-            return list;
-        }
-
-        public async Task<IEnumerable<ParticipantEntity>> ListGeneral()
-        {
-            var list = await _participantRepository.ListGeneral();
-            if (list.Count() == 0)
-                throw new NotFoundException();
-
-            return list;
-        }
+        public async Task<IEnumerable<ParticipantEntity>> ListGeneral() =>
+            await _participantRepository.ListGeneral();
 
         public async Task<ParticipantEntity> WinnerElderly()
         {
             var list = await _participantRepository.ListElderly();
-            if (list.Count() == 0)
-                throw new BadRequestException("Não existem participantes cadastrados.");
-
             int r = new Random().Next(list.Count());
             return list.ToArray()[r];
         }
@@ -85,9 +64,6 @@ namespace DoorPrize.ApplicationCore.Services
         public async Task<ParticipantEntity> WinnerPhysicallyHandicapped()
         {
             var list = await _participantRepository.ListPhysicallyHandicapped();
-            if (list.Count() == 0)
-                throw new BadRequestException("Não existem participantes cadastrados.");
-
             int r = new Random().Next(list.Count());
             return list.ToArray()[r];
         }
@@ -97,8 +73,6 @@ namespace DoorPrize.ApplicationCore.Services
             var winnes = new List<ParticipantEntity>();
 
             var list = (await _participantRepository.ListGeneral()).ToList();
-            if (list.Count == 0)
-                throw new BadRequestException("Não existem participantes cadastrados.");
 
             while (winnes.Count < 3 || winnes.Count <= list.Count)
             {
