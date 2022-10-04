@@ -1,6 +1,8 @@
 ﻿using DoorPrize.ApplicationCore.DTOs.AppSettings;
 using DoorPrize.ApplicationCore.Interfaces;
+using DoorPrize.ApplicationCore.Services;
 using DoorPrize.Infrastructure.Data;
+using DoorPrize.Infrastructure.File;
 using DoorPrize.Infrastructure.Logging;
 using Microsoft.Extensions.Options;
 using Serilog;
@@ -38,7 +40,7 @@ namespace DoorPrize.Api.Configurations
 
         public virtual void AddApplicationCore(IServiceCollection services)
         {
-            
+            services.AddScoped<IParticipantService, ParticipantService>();
         }
 
         public virtual void AddDatabase(IServiceCollection services) =>
@@ -47,6 +49,9 @@ namespace DoorPrize.Api.Configurations
         public virtual void AddInfrastructure(IServiceCollection services)
         {
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+
+            services.AddScoped<IParticipantRepository, ParticipantRepository>();
+            services.AddScoped<IParticipantFile, ParticipantFile>();
         }
     }
 }

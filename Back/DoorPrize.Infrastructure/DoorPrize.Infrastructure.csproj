@@ -16,8 +16,4 @@
     <ProjectReference Include="..\DoorPrize.ApplicationCore\DoorPrize.ApplicationCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Config\" />
-  </ItemGroup>
-
 </Project>
