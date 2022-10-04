@@ -28,15 +28,17 @@ namespace DoorPrize.Api
             services.AddApiVersioning();
         }
 
-        public void Configure(WebApplication app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwaggerUISetup();
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
             app.UseAuthorization();
 
-            app.MapControllers();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
