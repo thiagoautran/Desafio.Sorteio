@@ -1,0 +1,48 @@
+﻿@model WinnersViewModel
+
+@{
+    ViewData["Title"] = "Lista de Participantes do Torneio";
+}
+
+<div class="text-center">
+    <p><b>Sorteio de Habitação</b></p>
+    <h1 class="display-4">Ganhadores do sorteio</h1>
+    <h2>Parabéns aos ganhadores</h2>
+    <br />
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>GANHADOR DA LISTA IDOSO</h4>
+                    <p>@Model.Elderly.CPF - @Model.Elderly.Name</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>GANHADOR DA LISTA DEFICIENTE FÍSICO</h4>
+                    <p>@Model.PhysicallyHandicapped.CPF - @Model.PhysicallyHandicapped.Name</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>GANHADORES DA LISTA GERAL</h4>
+                    @foreach (var participant in Model.General)
+                    {
+                        <p>@participant.CPF - @participant.Name</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -9,7 +9,7 @@ CREATE TABLE Participant
     [CPF] [bigint] NOT NULL,
     [BirthDate] [datetime] NOT NULL,
     [Income] [decimal] NULL,
-    [Quota] [int] NULL,
+    [Quota] [varchar](100) NOT NULL,
     [CID] [varchar](50) NULL
 ) ON [PRIMARY]
 GO

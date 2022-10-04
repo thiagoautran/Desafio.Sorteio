@@ -1,4 +1,4 @@
-namespace DoorPrize.MVC.Models
+namespace DoorPrize.ApplicationCore.Models
 {
     public class ErrorViewModel
     {

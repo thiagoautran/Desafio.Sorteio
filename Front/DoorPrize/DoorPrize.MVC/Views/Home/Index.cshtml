@@ -1,8 +1,83 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model ParticipantsViewModel
+
+@{
+    ViewData["Title"] = "Lista de Participantes do Torneio";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p><b>Sorteio de Habitação</b></p>
+    <h1 class="display-4">Lista de Participantes do Torneio</h1>
+
+    <h4>Total de participantes: @Model.NumberParticipants</h4> 
+    <br />
+   
+    <table class="table">
+        <tr>
+            <th>
+                CPF
+            </th>
+            <th>
+                NOME
+            </th>
+        </tr>
+        @foreach (var item in Model.Elderly)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>
+                CPF
+            </th>
+            <th>
+                NOME
+            </th>
+        </tr>
+        @foreach (var item in Model.PhysicallyHandicapped)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>
+                CPF
+            </th>
+            <th>
+                NOME
+            </th>
+        </tr>
+        @foreach (var item in Model.General)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+</div>
+<div class="text-left">
+    @Html.ActionLink("Realizar Sorteio", "Winners")
 </div>
