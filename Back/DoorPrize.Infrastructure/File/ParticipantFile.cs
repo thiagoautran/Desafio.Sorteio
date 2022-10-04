@@ -31,7 +31,8 @@ namespace DoorPrize.Infrastructure.File
                 if (birthDate == new DateTime())
                     continue;
 
-                decimal.TryParse(rows[3].ToString().Replace(".", ","), out decimal income);
+                decimal income = 0;
+                decimal.TryParse(rows[3].ToString(), out income);
                 string quota = rows[4].ToString();
                 string cid = rows[5].ToString();
 

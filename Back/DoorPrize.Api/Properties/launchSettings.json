@@ -5,7 +5,7 @@
       "launchBrowser": true,
       "launchUrl": "",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Docker"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:8003;http://localhost:8004"
@@ -15,7 +15,7 @@
       "launchBrowser": true,
       "launchUrl": "",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Docker"
       }
     },
     "Docker": {
