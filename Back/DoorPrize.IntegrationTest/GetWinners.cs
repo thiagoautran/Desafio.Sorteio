@@ -43,6 +43,15 @@ namespace DoorPrize.IntegrationTest
             Assert.AreEqual(3, data.Data.General.Count());
         }
 
+        [TestMethod]
+        public async Task BadRequest()
+        {
+            var response = await HttpClient.Fluent().GetAsync("door.prize/v1/participant/winners");
+
+            Assert.IsNotNull(response.HttpStatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.HttpStatusCode.Value);
+        }
+
         private async Task AddElderly()
         {
             var participantRepository = Repository.DbContext.Set<ParticipantEntity>();

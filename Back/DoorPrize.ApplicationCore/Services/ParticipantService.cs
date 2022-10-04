@@ -57,6 +57,9 @@ namespace DoorPrize.ApplicationCore.Services
         public async Task<ParticipantEntity> WinnerElderly()
         {
             var list = await _participantRepository.ListElderly();
+            if (list.Count() == 0)
+                return null;
+
             int r = new Random().Next(list.Count());
             return list.ToArray()[r];
         }
@@ -64,6 +67,9 @@ namespace DoorPrize.ApplicationCore.Services
         public async Task<ParticipantEntity> WinnerPhysicallyHandicapped()
         {
             var list = await _participantRepository.ListPhysicallyHandicapped();
+            if (list.Count() == 0)
+                return null;
+
             int r = new Random().Next(list.Count());
             return list.ToArray()[r];
         }
@@ -73,6 +79,8 @@ namespace DoorPrize.ApplicationCore.Services
             var winnes = new List<ParticipantEntity>();
 
             var list = (await _participantRepository.ListGeneral()).ToList();
+            if (list.Count() == 0)
+                return new List<ParticipantEntity>();
 
             while (winnes.Count < 3 || winnes.Count <= list.Count)
             {

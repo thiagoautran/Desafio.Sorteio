@@ -44,14 +44,14 @@ namespace DoorPrize.IntegrationTest
             Assert.AreEqual(7, data.Data.NumberParticipants);
         }
 
-        //[TestMethod]
-        //public async Task NotFound()
-        //{
-        //    var response = await HttpClient.Fluent().GetAsync("door.prize/v1/participant/elderly");
+        [TestMethod]
+        public async Task NotFound()
+        {
+            var response = await HttpClient.Fluent().GetAsync("door.prize/v1/participant");
 
-        //    Assert.IsNotNull(response.HttpStatusCode);
-        //    Assert.AreEqual(HttpStatusCode.NotFound, response.HttpStatusCode.Value);
-        //}
+            Assert.IsNotNull(response.HttpStatusCode);
+            Assert.AreEqual(HttpStatusCode.NotFound, response.HttpStatusCode.Value);
+        }
 
         private async Task AddElderly()
         {
