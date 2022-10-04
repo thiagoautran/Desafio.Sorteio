@@ -49,6 +49,14 @@
 
 <br/>
 
+### Importando arquivo csv
+1) Faça o download do arquivo csv [lista_pessoas.csv](https://github.com/thiagoautran/Desafio.Sorteio/blob/main/lista_pessoas.csv) na raiz do repositorio
+
+2) Importe o arquivo pela rota
+> curl --location --request POST 'https://localhost:8003/door.prize/v1/participant' --form 'arquivo=@"/C:/lista_pessoas.csv"'
+
+<br/>
+
 ### Acessando projetos publicados
 
 1) Api [www.localhost:8003](http://www.localhost:8003/index.html)
