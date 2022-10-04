@@ -23,6 +23,8 @@ namespace DoorPrize.ApplicationCore.Services
             if (participants.Count() == 0)
                 throw new BadRequestException("Não existem participantes elegíveis para cadastro.");
 
+            Console.Write($"Quantidade de participantes: {participants.Count()} no arquivo csv.");
+
             foreach (var participant in participants)
             {
                 if(!ValidCpf.Valid(participant.CPF.ToString(@"000\.000\.000\-00")))
@@ -38,9 +40,10 @@ namespace DoorPrize.ApplicationCore.Services
                 if (participant.Quota.Trim().ToUpper() == "IDOSO" && year < 60)
                     continue;
 
-                if (participant.Quota.Trim().ToUpper() == "DEFICIENTE FÍSICO" && string.IsNullOrEmpty(participant.CID))
+                if (participant.Quota.Trim().ToUpper() == "DEIFICENTE FÍSICO" && string.IsNullOrEmpty(participant.CID))
                     continue;
 
+                Console.Write($"Adicionado participante: {participant.CPF} - {participant.Name}");
                 await _participantRepository.Insert(participant);
             }
         }
