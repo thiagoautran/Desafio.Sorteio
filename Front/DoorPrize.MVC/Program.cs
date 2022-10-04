@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IParticipantIntegration, ParticipantIntegration>();
 builder.Services.AddHttpClient("PARTICIPANT", c =>
 {
-    c.BaseAddress = new Uri("http://localhost:8003");
+    c.BaseAddress = new Uri("http://host.docker.internal:8003");
 });
 
 var app = builder.Build();

@@ -19,7 +19,7 @@ namespace DoorPrize.Infrastructure.DoorPrize
 
             var request = new HttpRequestMessage();
             request.Method = HttpMethod.Get;
-            request.RequestUri = new Uri("http://localhost:8003/door.prize/v1/participant");
+            request.RequestUri = new Uri("http://host.docker.internal:8003/door.prize/v1/participant");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var response = await client.SendAsync(request);
@@ -39,7 +39,7 @@ namespace DoorPrize.Infrastructure.DoorPrize
 
             var request = new HttpRequestMessage();
             request.Method = HttpMethod.Get;
-            request.RequestUri = new Uri("http://localhost:8003/door.prize/v1/participant/winners");
+            request.RequestUri = new Uri("http://host.docker.internal:8003/door.prize/v1/participant/winners");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var response = await client.SendAsync(request);
